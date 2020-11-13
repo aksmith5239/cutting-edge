@@ -29,13 +29,13 @@ router.get('/:id', (req, res) => {
     ],
     include: [
         {
-            model: Appointment,
-            attributes: ['id', 'customer_id', 'appointment_date', 'appointment_time', 'stylist_id'],   
-        }, 
-        {
             model: Service,
             attributes: ['style', 'description'],
-        }      
+              include: {
+              model: Appointment,
+              attributes: ['appointment_date', 'appointment_time', 'stylist_id'],
+        } 
+      }     
     ]
 })
       .then(dbCustomerData => {
@@ -59,8 +59,7 @@ router.post("/", (req, res) => {
         phone: req.body.phone,
         email: req.body.email,
         username: req.body.username,
-        password: req.body.password,
-        
+        password: req.body.password,  
   })
   
   .then(dbCustomerData => {

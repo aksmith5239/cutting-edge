@@ -13,10 +13,10 @@ Appointment.init(
       primaryKey: true,
       autoIncrement: true
     },
-    customer_id: {
+    service_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'customer',
+        model: 'service',
         key: 'id',
         },
     },

@@ -4,19 +4,19 @@ const { Service, Stylist, Customer } = require('../../models');
 //get api/service
 router.get('/', (req, res) => {
     Service.findAll({
-        attributes: ['id', 'category', 'style', 'description', 'stylist_id', 'price', 'time_alloted','customer_id', 'stylist_id'],
-        include: [
-            {
-                model: Stylist,
-                attributes: ['salon_name']
-            }
-        ], 
-        include: [
-            {
-                model: Customer,
-                attributes: ['username']
-            }
-        ]
+        attributes: ['id', 'category', 'style', 'description', 'price', 'time_alloted','customer_id'],
+        // include: [
+        //     {
+        //         model: Stylist,
+        //         attributes: ['salon_name']
+        //     }
+        // ], 
+        // include: [
+        //     {
+        //         model: Customer,
+        //         attributes: ['username']
+        //     }
+        // ]
     })
         .then(dbStylistData => res.json(dbStylistData))
         .catch(err => {

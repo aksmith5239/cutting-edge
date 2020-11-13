@@ -4,36 +4,50 @@ const Stylist = require('./Stylist');
 const Service = require('./Service');
 
 //associations
-Stylist.hasMany(Service, {
-    foreignKey: 'stylist_id'
-});
+// Stylist.hasMany(Service, {
+//     foreignKey: 'stylist_id'
+// });
 
-Service.belongsTo(Stylist, {
-    foreignKey: 'stylist_id'
-});
+// Service.belongsTo(Stylist, {
+//     foreignKey: 'stylist_id'
+// });
 
-Stylist.hasMany(Customer, {
-    foreignKey: 'stylist_id'
-});
+// Stylist.hasMany(Appointment, {
+//     foreignKey: 'stylist_id'
+// });
+// Service.hasMany(Customer, {
+//     foreignKey: 'customer_id'
+// });
 
 Customer.hasOne(Service, {
     foreignKey: 'customer_id'
 });
 
-Service.hasMany(Customer,  {
-    foreignKey: 'stylist_id'
+// Service.belongsTo(Customer, {
+//     foreignKey: 'customer_id'
+// });
+
+Service.hasMany(Appointment,  {
+    foreignKey: 'service_id'
 });
+
+Appointment.belongsTo(Service, {
+    foreignKey: 'service_id'
+});
+// Appointment.hasOne(Service, {
+//     foreignKey: 'service_id'
+// });
 
 Stylist.hasMany(Appointment, {
     foreignKey: 'stylist_id'
 });
 
-Customer.hasMany(Appointment, {
-    foreignKey: 'customer_id'
-  });
+// Customer.hasMany(Appointment, {
+//     foreignKey: 'customer_id'
+//   });
 
-Appointment.belongsTo(Customer, {
-    foreignKey: 'customer_id',
+Appointment.belongsTo(Stylist, {
+    foreignKey: 'stylist_id',
   });
 
 module.exports = {

@@ -1,15 +1,19 @@
 const router = require('express').Router();
-const { Appointment, Customer } = require('../../models');
+const { Appointment, Customer, Service, Stylist } = require('../../models');
 //const withAuth = require("../../utils/auth");
 
 //get api/appointment
 router.get('/',  (req, res) => {
     Appointment.findAll({
-        attributes: ['id', 'customer_id','appointment_date', 'appointment_time' , 'stylist_id'],
+        attributes: ['id', 'service_id','appointment_date', 'appointment_time' , 'stylist_id'],
         include: [
             {
-                model: Customer,
-                attributes: ['username']
+                model: Service,
+                attributes: ['style']
+            },
+            {
+                model: Stylist,
+                attributes: ['salon_name']
             }
         ]
     })
@@ -26,7 +30,18 @@ router.get('/:id', (req, res) => {
         attributes: {exclude: ['password']},
         where: {
             id: req.params.id
-        }
+        }, 
+        include: [
+            {
+                model: Service,
+                attributes: ['style']
+                
+            },
+            {
+                model: Stylist,
+                attributes: ['salon_name']
+            }
+        ]
     })
     .then(dbAppointmentData => {
         if(!dbAppointmentData) {
@@ -44,10 +59,10 @@ router.get('/:id', (req, res) => {
 //post api/appointment
 router.post('/', (req, res) => {
     Appointment.create({
-        customer_id: req.session.customer_id,
+        service_id: req.body.service_id,
         appointment_date: req.body.appointment_date,
         appointment_time: req.body.appointment_time,
-        // stylist_id: req.body.stylist_id,
+        stylist_id: req.body.stylist_id
     })
     .then(dbAppointmentData => res.json(dbAppointmentData))
     .catch(err => {

@@ -38,14 +38,14 @@ Service.init(
                 model: 'customer',
                 key: 'id'
             } 
-        },
-        stylist_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'stylist',
-                key: 'id'
-            } 
         }
+        // stylist_id: {
+        //     type: DataTypes.INTEGER,
+        //     references: {
+        //         model: 'stylist',
+        //         key: 'id'
+        //     } 
+        // }
     },
     {
         //table configuration

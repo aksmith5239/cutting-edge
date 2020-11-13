@@ -21,10 +21,10 @@ router.get('/:id', (req, res) => {
             id: req.params.id
         },
         include: [
-            {
-                model: Service,
-                attributes: ['id', 'category', 'style', 'customer_id', 'stylist_id', 'price', 'time_alloted']
-            },
+            // {
+            //     model: Service,
+            //     attributes: ['id', 'category', 'style', 'customer_id', 'stylist_id', 'price', 'time_alloted']
+            // },
             {
                 model: Appointment,
                 attributes: ['id', 'customer_id', 'appointment_date', 'appointment_time', 'stylist_id']
