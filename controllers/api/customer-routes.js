@@ -34,6 +34,7 @@ router.get('/:id', (req, res) => {
               include: {
               model: Appointment,
               attributes: ['appointment_date', 'appointment_time', 'stylist_id'],
+              
         } 
       }     
     ]

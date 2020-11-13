@@ -1,22 +1,20 @@
 const router = require('express').Router();
-const { Service, Stylist, Customer } = require('../../models');
+const { Service, Stylist, Customer, Appointment } = require('../../models');
 
 //get api/service
 router.get('/', (req, res) => {
     Service.findAll({
         attributes: ['id', 'category', 'style', 'description', 'price', 'time_alloted','customer_id'],
-        // include: [
-        //     {
-        //         model: Stylist,
-        //         attributes: ['salon_name']
-        //     }
-        // ], 
-        // include: [
-        //     {
-        //         model: Customer,
-        //         attributes: ['username']
-        //     }
-        // ]
+        include: [
+            {
+                model: Appointment,
+                attributes: ['appointment_date', 'appointment_time', 'stylist_id'],
+               include: {
+                model: Stylist,
+                attributes: ['salon_name']
+               }
+            }
+        ]
     })
         .then(dbStylistData => res.json(dbStylistData))
         .catch(err => {

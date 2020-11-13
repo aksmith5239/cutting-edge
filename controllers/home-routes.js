@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const {Service, Stylist} = require('../models');
+const {Service, Stylist, Appointment} = require('../models');
 
 router.get('/', (req, res) => {
    Service.findAll({
@@ -11,13 +11,17 @@ router.get('/', (req, res) => {
            'description',
            'price',
            'time_alloted',
-           'stylist_id'
+           'customer_id'
        ],
        include: [
            {
-               model: Stylist,
-               attributes: ['salon_name']
+            model: Appointment,
+            attributes: ['appointment_date', 'appointment_time', 'stylist_id'],
+           include: {
+            model: Stylist,
+            attributes: ['salon_name']
            }
+          }
        ]
    })
    .then(dbServiceData => {

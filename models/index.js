@@ -8,14 +8,14 @@ const Service = require('./Service');
 //     foreignKey: 'stylist_id'
 // });
 
-// Service.belongsTo(Stylist, {
-//     foreignKey: 'stylist_id'
+// Service.belongsTo(Customer, {
+//     foreignKey: 'customer_id'
 // });
 
 // Stylist.hasMany(Appointment, {
 //     foreignKey: 'stylist_id'
 // });
-// Service.hasMany(Customer, {
+// Service.hasOne(Customer, {
 //     foreignKey: 'customer_id'
 // });
 

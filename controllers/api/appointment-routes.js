@@ -7,14 +7,14 @@ router.get('/',  (req, res) => {
     Appointment.findAll({
         attributes: ['id', 'service_id','appointment_date', 'appointment_time' , 'stylist_id'],
         include: [
-            {
-                model: Service,
-                attributes: ['style']
-            },
-            {
-                model: Stylist,
-                attributes: ['salon_name']
-            }
+            // {
+            //     model: Service,
+            //     attributes: ['style']
+            // },
+            // {
+            //     model: Stylist,
+            //     attributes: ['salon_name']
+            // }
         ]
     })
         .then(dbAppointmentData => res.json(dbAppointmentData))
